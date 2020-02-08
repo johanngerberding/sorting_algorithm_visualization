@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/lib/jquery-3.4.1.js" type="text/javascript"></script>
     <title>Sorting Visualization</title>
 </head>
 <body>
-
-    <h1>Sorting Algorithm Visualization</h1>
-
-    <form>
-        <input type="text" id="num" placeholder="Please enter the number of Elements">
-        <select name="algorithms" id="alg">
-            <option value="insertion">Insertion Sort</option>
-            <option value="quicksort" disabled>Quicksort</option>
-            <option value="mergesort" disabled>Mergesort</option>
-            <option value="heapsort" disabled>Heapsort</option>
-          </select>
-        <button type="button" id="display">Display</button>
-        <button type="button" id="sort">Sort</button>
-    </form>
+    <div id="header">
+        <h1>Sorting Algorithm Visualization</h1>
+        <form id="params">
+            <input type="text" id="num" placeholder="Please enter the number of Elements">
+            <select name="algorithms" id="alg">
+                <option value="insertion">Insertion Sort</option>
+                <option value="quicksort" disabled>Quicksort</option>
+                <option value="mergesort" disabled>Mergesort</option>
+                <option value="heapsort" disabled>Heapsort</option>
+            </select>
+            <input type="text" id="delay" placeholder="Please enter the time delay in ms">
+            <button type="button" id="display">Display</button>
+            <button type="button" id="sort">Sort</button>
+            <button type="button" id="interrupt">Interrupt</button>
+        </form>
+    </div>
 
     <div id="visualization">
-        
+
     </div>
 
     <script src="js/sorting.js" type="text/javascript"></script> 

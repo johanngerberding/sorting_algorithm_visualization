@@ -1,20 +1,45 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background-color: white;
 }
 
+button {
+    height: 30px;
+}
+
+select {
+    height: 30px;
+}
+
+input {
+    height: 30px;
+}
+
+#header {
+    width: 80%;
+    padding: 0px;
+    margin: auto;
+}
+
 #visualization {
-    background-color: black;
+    border-top: 2px solid black;
     color: white;
     width: 80%;
-    height: 500px;
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    margin: auto;
 }
 
 .number {
     color: black;
-    background-color: white;
+    background-color: lightgray;
     display: inline-block;
     border: 0px;
-    padding: 0px 0px 0px 0px;
+    padding: 0px;
+}
+
+#params {
+    margin-bottom: 20px;
 }
