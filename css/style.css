@@ -2,9 +2,19 @@ body {
     background-color: white;
 }
 
-div {
+#visualization {
     background-color: black;
     color: white;
     width: 80%;
     height: 500px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.number {
+    color: black;
+    background-color: white;
+    display: inline-block;
+    border: 0px;
+    padding: 0px 0px 0px 0px;
 }
