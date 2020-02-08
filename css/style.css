@@ -1,0 +1,10 @@
+body {
+    background-color: white;
+}
+
+div {
+    background-color: black;
+    color: white;
+    width: 80%;
+    height: 500px;
+}
