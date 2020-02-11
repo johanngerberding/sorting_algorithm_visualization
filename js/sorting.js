@@ -1,6 +1,6 @@
 var arr = [];
 var alg = $('#alg :selected').text();
-var delay = 250;
+var delay = 200;
 
 $('#interrupt').on('click', () => {
     location.reload();
@@ -12,7 +12,7 @@ $('#visualization').css('height', ($(window).innerHeight() * 0.70).toString() + 
 $('#display').on("click", () => {
     alg = $('#alg :selected').text();
     if(Number.isNaN(parseInt($('#delay').val()))) {
-        delay = 250;
+        delay = 200;
     } else {
         delay = parseInt($('#delay').val());
     }
@@ -85,7 +85,6 @@ function sortArray(arr, alg, delay) {
 }
 
 async function insertionSort(arr, delay) {
-    
     // Logic of the Insertion Sort Algorithm
     for(var i = 0; i < arr.length; i++) {
         var el = arr[i];
@@ -105,12 +104,31 @@ async function insertionSort(arr, delay) {
         await sleep(delay);
         visualizeArray(arr);
     }
+    // Enable buttons after sorting
     $('#display').prop('disabled', false);
     $('#sort').prop('disabled', false);
     $('#alg').prop('disabled', false);
     $('#num').prop('disabled', false);
     $('#delay').prop('disabled', false);
     return arr;
+}
+
+function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+async function quicksort(arr, delay) {
+    return;
+}
+
+async function mergesort(arr, delay) {
+    return;
+}
+
+async function heapsort(arr, delay) {
+    return;
 }
 
 function sleep(ms) {
