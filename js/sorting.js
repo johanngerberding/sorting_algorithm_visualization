@@ -6,11 +6,14 @@ $('#interrupt').on('click', () => {
     location.reload();
 });
 
+$('#alg').on("change", () => {
+    alg = $('#alg :selected').text();
+});
+
 $('#header').css('height', ($(window).innerHeight() * 0.15).toString() + "px");
 $('#visualization').css('height', ($(window).innerHeight() * 0.70).toString() + "px");
 
 $('#display').on("click", () => {
-    alg = $('#alg :selected').text();
     if(Number.isNaN(parseInt($('#delay').val()))) {
         delay = 200;
     } else {
@@ -77,6 +80,8 @@ function sortArray(arr, alg, delay) {
     // This function initializes the sorting process
     if(alg == "Insertion Sort") {
         arr = insertionSort(arr, delay);
+    } else if(alg == "Quicksort") {
+        arr = itQuickSort(arr, 0, arr.length - 1, delay);
     } else {
         console.log("This algorithm isn't implemented yet.");
     }
@@ -119,9 +124,66 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-async function quicksort(arr, delay) {
-    return;
+
+async function itQuickSort(arr, low, high, delay) {
+    // iterative quicksort implementation
+    var stack = [];
+    stack.push(low);
+    stack.push(high);
+
+    while(stack.length > 0) {
+        // Pop high and low
+        high = stack.pop();
+        low = stack.pop();
+        // Set pivot element at its correct position
+        // var p = partition(arr, low, high);
+        // Put function here
+        var pivot = arr[high];
+        $('#num' + high).css('background-color', 'red');
+        await sleep(delay);
+        visualizeArray(arr);
+        // index of smaller element
+        var i = (low - 1);
+        for(var j = low; j <= high - 1; j++) {
+            //if current element is smaller than or equal to pivot
+            if(arr[j] <= pivot) {
+                i++;
+                // swap arr[i] and arr[j]
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        var temp = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = temp;
+
+        var p = i + 1;
+
+        // if there are elements on the left side, then push left side to stack
+        if(p - 1 > low) {
+            stack.push(low);
+            stack.push(p - 1);
+        }
+
+        // if there are elements on the right side, push right side to stack
+        if(p + 1 < high) {
+            stack.push(p+1);
+            stack.push(high);
+        }
+    }
+
+    visualizeArray(arr);
+    $('#display').prop('disabled', false);
+    $('#sort').prop('disabled', false);
+    $('#alg').prop('disabled', false);
+    $('#num').prop('disabled', false);
+    $('#delay').prop('disabled', false);
+    return arr;
 }
+
 
 async function mergesort(arr, delay) {
     return;
