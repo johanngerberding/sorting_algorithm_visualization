@@ -27,8 +27,13 @@ $('#display').on("click", () => {
         if(number < 2000000) {
             // Create a randomly generated array of integers to sort
             arr = randomNumbers(number);
+            color = [];
+            for (var i = 0; i < arr.length; i++) {
+                color.push('lightgray');
+            }
             console.log(arr);
-            visualizeArray(arr);
+            console.log(color);
+            visualizeArray(arr, color);
         } else {
             alert("Please choose a number smaller than 2.000.000.");
         }
@@ -53,7 +58,8 @@ function randomNumbers(n) {
     return [...Array(n)].map(() => Math.floor(Math.random() * 100));
 }
 
-function visualizeArray(arr) {
+function visualizeArray(arr, col) {
+    // Delete the actual visualization
     if($('#visualization').children().length > 0) {
         $('#visualization').children().remove();
     }
@@ -64,13 +70,17 @@ function visualizeArray(arr) {
     var maxVal = Math.max(...arr);
     var elHeight = height / maxVal;
     // in the div
+
     for(var i = 0; i < arr.length; i++) {
         var displayHeight = arr[i] * elHeight;
         var displayWidth = elWidth * 0.9;
         var displayMargin = elWidth * 0.05;
         $("<div/>")
             .attr({'class': 'number', 'id': 'num' + i})
-            .css({'width': displayWidth, 'height': displayHeight, 'margin': displayMargin})
+            .css({'width': displayWidth, 
+                'height': displayHeight, 
+                'margin': displayMargin,
+                'background-color': col[i]})
             .html(arr[i])
             .appendTo('#visualization');
     }
@@ -107,7 +117,7 @@ async function insertionSort(arr, delay) {
         $('#num' + j).css('background-color', 'lightgreen');
         arr[j] = el;
         await sleep(delay);
-        visualizeArray(arr);
+        visualizeArray(arr, color);
     }
     // Enable buttons after sorting
     $('#display').prop('disabled', false);
@@ -137,28 +147,58 @@ async function itQuickSort(arr, low, high, delay) {
         low = stack.pop();
         // Set pivot element at its correct position
         // var p = partition(arr, low, high);
-        // Put function here
         var pivot = arr[high];
-        $('#num' + high).css('background-color', 'red');
+        console.log('pivot: ', pivot);
+        console.log('position ', high);
+        color[high] = 'red';
+        // $('#num' + high).css('background-color', 'red');
         await sleep(delay);
-        visualizeArray(arr);
         // index of smaller element
         var i = (low - 1);
         for(var j = low; j <= high - 1; j++) {
+            
             //if current element is smaller than or equal to pivot
             if(arr[j] <= pivot) {
                 i++;
                 // swap arr[i] and arr[j]
+                if(i != j) {
+                    color[i] = 'orange';
+                    color[j] = 'orange';
+                    visualizeArray(arr, color);
+                    await sleep(delay);
+                }
+                
                 var temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
+
+                if(i != j) {
+                    visualizeArray(arr, color);
+                    await sleep(delay);
+                    console.log('swap: ', arr);
+                    color[j] = 'lightgray';
+                    if(i >= 0) {
+                        color[i] = 'lightgray';
+                    }
+                }
+                
+                
             }
+
+            
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
+        color[i+1] = 'green';
+        visualizeArray(arr, color);
+        await sleep(delay);
         var temp = arr[i+1];
         arr[i+1] = arr[high];
         arr[high] = temp;
+        await sleep(delay);
+        color[high] = 'lightgray';
+        color[i+1] = 'lightgray';
+        console.log('pivot swap: ', arr);
 
         var p = i + 1;
 
@@ -175,7 +215,7 @@ async function itQuickSort(arr, low, high, delay) {
         }
     }
 
-    visualizeArray(arr);
+    visualizeArray(arr, color);
     $('#display').prop('disabled', false);
     $('#sort').prop('disabled', false);
     $('#alg').prop('disabled', false);
@@ -185,7 +225,12 @@ async function itQuickSort(arr, low, high, delay) {
 }
 
 
-async function mergesort(arr, delay) {
+async function itMergesort(arr, delay) {
+    var currentSize;
+    var left_start;
+    for(currentSize = 1; currentSize <= arr.length-1; currentSize = 2*currentSize) {
+        
+    }
     return;
 }
 
