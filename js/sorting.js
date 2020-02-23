@@ -1,6 +1,6 @@
 var arr = [];
 var alg = $('#alg :selected').text();
-var delay = 200;
+var delay = 200; // 200ms delay between actions
 
 $('#interrupt').on('click', () => {
     location.reload();
@@ -10,10 +10,12 @@ $('#alg').on("change", () => {
     alg = $('#alg :selected').text();
 });
 
+// set heights of the two big elements (divs)
 $('#header').css('height', ($(window).innerHeight() * 0.15).toString() + "px");
 $('#visualization').css('height', ($(window).innerHeight() * 0.70).toString() + "px");
 
 $('#display').on("click", () => {
+    // Check if delay input is an integer
     if(Number.isNaN(parseInt($('#delay').val()))) {
         delay = 200;
     } else {
@@ -54,10 +56,14 @@ $('#sort').on("click", () => {
     arr = sortArray(arr, alg, delay);
 });
 
+// creates an array with n random numbers
 function randomNumbers(n) {
     return [...Array(n)].map(() => Math.floor(Math.random() * 100));
 }
 
+
+// Function to visualize the actual array
+// col => colors of the array elements (important for visualization)
 function visualizeArray(arr, col) {
     // Delete the actual visualization
     if($('#visualization').children().length > 0) {
